@@ -1,0 +1,6 @@
+{
+  "appId": "com.myshop.partscounter",
+  "appName": "Parts Counter",
+  "webDir": "dist",
+  "android": { "allowMixedContent": false }
+}

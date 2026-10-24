@@ -1,0 +1,21 @@
+{
+  "name": "phone-parts-shop",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite www",
+    "build": "vite build www --outDir ../dist --emptyOutDir",
+    "sync": "npm run build && npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/local-notifications": "^6.1.0",
+    "firebase": "^10.14.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2",
+    "vite": "^5.4.8"
+  }
+}
