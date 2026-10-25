@@ -122,7 +122,7 @@ async function route() {
     });
     stop = () => { unsub(); if (child) child(); };
   } catch (e) {
-    root.innerHTML = '<div class="auth"><div class="center"><div class="emoji">📡</div><p>' + t('errNet') + '</p><p class="mute" dir="ltr">' + esc(String((e && (e.code  e.message))  e)) + '</p><button class="btn" id="r-retry">' + t('checkAgain') + '</button></div>' + langBar() + '</div>';
+    root.innerHTML = '<div class="auth"><div class="center"><p>' + t('errNet') + '</p><p class="mute" dir="ltr">' + esc(String(e && e.code ? e.code : (e && e.message ? e.message : e))) + '</p><button class="btn" id="r-retry">' + t('checkAgain') + '</button></div>' + langBar() + '</div>';
     $('#r-retry').onclick = () => route();
   }
 }
