@@ -27,7 +27,7 @@ function authErr(e) {
   if (c.includes('email-already-in-use')) return t('errExists');
   if (c.includes('network')) return t('errNet');
   if (c.includes('invalid-credential') || c.includes('wrong-password') || c.includes('user-not-found') || c.includes('invalid-login')) return t('errBadLogin');
-  return t('errOther');
+  return t('errOther') + ' [' + (c ? c : String(e && e.message)) + ']';
 }
 
 function showAuth() {
@@ -56,7 +56,7 @@ function showAuth() {
         try { await createProfile(cred.user, name, phone); } finally { signingUp = false; }
         route();
       } else {
-        await signInWithEmailAndPassword(auth, emailFor(phone), pass);
+        await Promise.race([signInWithEmailAndPassword(auth, emailFor(phone), pass), new Promise((ok, no) => setTimeout(() => no({ code: 'timeout' }), 20000))]);
       }
     } catch (e) { signingUp = false; err.textContent = authErr(e); go.disabled = false; if (up && e && e.code === undefined) route(); }
   };
