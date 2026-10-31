@@ -6,4 +6,4 @@ import { firebaseConfig } from './config.js';
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 // Long polling avoids connection problems inside the Android WebView.
-export const db = initializeFirestore(app, { experimentalforceLongPolling: true });
+export const db = initializeFirestore(app, { experimentalForceLongPolling: true });
