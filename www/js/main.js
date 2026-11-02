@@ -36,11 +36,11 @@ function showAuth() {
   root.innerHTML = '<div class="auth"><h1>' + t('appName') + '</h1><p class="mute">' + (up ? t('signup') : t('signin')) + '</p>' +
     (up ? '<label class="f"><span>' + t('name') + '</span><input id="a-name" autocomplete="name"></label>' : '') +
     '<label class="f"><span>' + t('phone') + '</span><input id="a-phone" type="tel" inputmode="tel" placeholder="' + t('phoneHint') + '" autocomplete="username"></label>' +
-    '<label class="f"><span>' + t('password') + '</span><div class="pw"><input id="a-pass" type="password" placeholder="' + (up ? t('passHint') : '') + '" autocomplete="' + (up ? 'new-password' : 'current-password') + '"><button type="button" class="eye" id="a-eye">👁</button></div></label>' +
+    '<label class="f"><span>' + t('password') + '</span><div class="pw"><input id="a-pass" type="password" placeholder="' + (up ? t('passHint') : '') + '" autocomplete="' + (up ? 'new-password' : 'current-password') + '"></div><a href="#" class="showpw" id="a-eye">' + t('show') + '</a></label>' +
     '<div class="err" id="a-err"></div>' +
     '<button class="btn full" id="a-go">' + (up ? t('signup') : t('signin')) + '</button>' +
     '<p class="center" style="padding:14px 0 0"><a href="#" id="a-sw" style="color:var(--pri)">' + (up ? t('haveAcc') : t('noAcc')) + '</a></p>' + langBar() + '</div>';
-  $('#a-eye').onclick = (e) => { e.preventDefault(); const i = $('#a-pass'); i.type = i.type === 'password' ? 'text' : 'password'; };
+  $('#a-eye').onclick = (e) => { e.preventDefault(); const i = $('#a-pass'); const hid = i.type === 'password'; i.type = hid ? 'text' : 'password'; e.target.textContent = hid ? t('hide') : t('show'); };
   $('#a-sw').onclick = (e) => { e.preventDefault(); mode = up ? 'in' : 'up'; showAuth(); };
   $('#a-go').onclick = async () => {
     const err = $('#a-err'); const go = $('#a-go');
@@ -86,11 +86,8 @@ function showWaiting(user, status, shopPhone) {
   root.innerHTML = '<div class="auth"><div class="center"><div class="emoji">' + (blocked ? '🚫' : '⏳') + '</div><h2>' + (blocked ? t('blockedTitle') : t('pendingTitle')) + '</h2>' +
     '<p class="mute">' + (blocked ? t('blockedText') : t('pendingText')) + '</p></div>' +
     (shopPhone ? '<a class="btn alt full" href="tel:' + esc(shopPhone) + '">📞 ' + t('callShop') + '</a>' : '') +
-    '<div class="card" style="margin-top:18px"><b>' + t('ownerBox') + '</b><p class="mute">' + t('ownerHint') + '</p>' +
-    '<div class="row"><input readonly value="' + esc(user.uid) + '" id="w-uid"><button class="btn sm" id="w-copy">' + t('copy') + '</button></div></div>' +
     '<button class="btn alt full" id="w-chk">' + t('checkAgain') + '</button>' +
     '<p class="center"><a href="#" id="w-out" style="color:var(--pri)">' + t('signout') + '</a></p>' + langBar() + '</div>';
-  $('#w-copy').onclick = async () => { try { await navigator.clipboard.writeText(user.uid); toast(t('copied')); } catch (e) { $('#w-uid').select(); } };
   $('#w-chk').onclick = () => route();
   $('#w-out').onclick = async (e) => { e.preventDefault(); const { auth } = await import('./fb.js'); signOut(auth); };
 }
