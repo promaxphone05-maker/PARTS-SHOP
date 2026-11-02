@@ -36,10 +36,11 @@ function showAuth() {
   root.innerHTML = '<div class="auth"><h1>' + t('appName') + '</h1><p class="mute">' + (up ? t('signup') : t('signin')) + '</p>' +
     (up ? '<label class="f"><span>' + t('name') + '</span><input id="a-name" autocomplete="name"></label>' : '') +
     '<label class="f"><span>' + t('phone') + '</span><input id="a-phone" type="tel" inputmode="tel" placeholder="' + t('phoneHint') + '" autocomplete="username"></label>' +
-    '<label class="f"><span>' + t('password') + '</span><input id="a-pass" type="password" placeholder="' + (up ? t('passHint') : '') + '" autocomplete="' + (up ? 'new-password' : 'current-password') + '"></label>' +
+    '<label class="f"><span>' + t('password') + '</span><div class="pw"><input id="a-pass" type="password" placeholder="' + (up ? t('passHint') : '') + '" autocomplete="' + (up ? 'new-password' : 'current-password') + '"><button type="button" class="eye" id="a-eye">👁</button></div></label>' +
     '<div class="err" id="a-err"></div>' +
     '<button class="btn full" id="a-go">' + (up ? t('signup') : t('signin')) + '</button>' +
     '<p class="center" style="padding:14px 0 0"><a href="#" id="a-sw" style="color:var(--pri)">' + (up ? t('haveAcc') : t('noAcc')) + '</a></p>' + langBar() + '</div>';
+  $('#a-eye').onclick = (e) => { e.preventDefault(); const i = $('#a-pass'); i.type = i.type === 'password' ? 'text' : 'password'; };
   $('#a-sw').onclick = (e) => { e.preventDefault(); mode = up ? 'in' : 'up'; showAuth(); };
   $('#a-go').onclick = async () => {
     const err = $('#a-err'); const go = $('#a-go');
