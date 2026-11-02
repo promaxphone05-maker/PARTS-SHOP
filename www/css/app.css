@@ -31,8 +31,8 @@ h2{font-size:18px;margin:6px 0 10px}
 label.f{display:block;margin:10px 0}
 label.f span{display:block;font-size:14px;color:var(--mute);margin-bottom:4px}
 input,select,textarea{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);min-height:48px}
-/* password eye */
-.pw{position:relative}.pw input{padding-inline-end:54px}.eye{position:absolute;inset-inline-end:4px;top:50%;transform:translateY(-50%);background:none;border:0;font-size:22px;padding:8px 10px;cursor:pointer}
+/* show password link */
+.showpw{display:inline-block;margin-top:6px;color:var(--pri);font-size:14px;text-decoration:underline}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--pri2);outline-offset:1px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .pill{display:inline-block;font-size:12px;border-radius:99px;padding:2px 9px;border:1px solid var(--line);color:var(--mute)}
